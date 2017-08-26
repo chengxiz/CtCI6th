@@ -1,0 +1,24 @@
+package cracking.ch4;
+
+public class Q_4_4_IsBalanced {
+	public static int checkHeight(TreeNode node){
+		if (node == null){
+			return -1;
+		}
+		int leftHeight = checkHeight(node.left);
+		int rightHeight = checkHeight(node.right);
+
+		if (leftHeight == Integer.MIN_VALUE) return Integer.MIN_VALUE;
+
+		if (rightHeight == Integer.MIN_VALUE) return Integer.MIN_VALUE;
+
+		if(Math.abs(leftHeight - rightHeight) <= 1){
+			return Math.max(leftHeight , rightHeight)
+		} else {
+			return Integer.MIN_VALUE;
+		}
+	}
+	public static boolean isBalanced(TreeNode root){
+		return checkHeight(root)!=Integer.MIN_VALUE;
+	}
+}

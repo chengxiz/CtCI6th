@@ -1,0 +1,74 @@
+package cracking.ch2;
+import cracking.Library.*;
+public class Q_2_2{
+	public static Node<?> target;
+	public static NodeWithIndex targetNode ;
+	public static SinglyLinkedList<Character> linkedList;
+	public static int kthtolast_rec(Node<?> head, int n){		
+		if ( head == null){
+			return 0;
+		}
+		Node<?> next = head.getNext();
+		int index = kthtolast_rec( next , n) + 1;
+		if (index == n) {
+			target = head;   
+		}
+		return index;
+	}
+	public static class Index{
+		public int value = 0;
+	}
+	public static Index kthtolast_rec2(Node<?> head, int n, Index i){
+		if (head == null) return new Index();
+		Node<?> next = head.getNext();
+		Index j = kthtolast_rec2(next, n, i);
+		j.value++;
+		if (j.value == n) target = next;
+		return i;
+	}
+	public static class NodeWithIndex {
+		public Node<?> node;
+		public int index;
+		public NodeWithIndex(Node<?> head) {
+			this.node = head;
+			this.index = 0;
+		}
+		public NodeWithIndex(Node<?> n, int i) {
+			this.node = n;
+			this.index = i;
+		}
+		public NodeWithIndex getNext(){
+			return new NodeWithIndex(node.getNext());
+		}
+	}
+	public static NodeWithIndex kthtolast_rec3(NodeWithIndex head, int n){
+		if (head.node == null) return new NodeWithIndex(head.node);
+		NodeWithIndex next = head.getNext();
+		NodeWithIndex recursion = kthtolast_rec3(next,n);
+		recursion.index ++;
+		if (recursion.index == n) {
+			targetNode = recursion;
+		}
+		return recursion;
+	} 
+	public static void main(String[] args) {
+		linkedList = new SinglyLinkedList<Character>();
+		linkedList.addLast('F');
+		linkedList.addLast('O');
+		linkedList.addLast('L');
+		linkedList.addLast('L');
+		linkedList.addLast('O');
+		linkedList.addLast('W');
+		linkedList.addLast(' ');
+		linkedList.addLast('U');
+		linkedList.addLast('P');	
+		@SuppressWarnings("unused")
+		int answer_Rec = kthtolast_rec(linkedList.head,4);
+		System.out.println("Answer is:" + target.getElement());
+		Index j = kthtolast_rec2(linkedList.head,5, new Index());
+		System.out.println("Answer is:" + target.getElement());
+		NodeWithIndex ni = new NodeWithIndex(linkedList.head);
+		NodeWithIndex nj = kthtolast_rec3(ni, 6);
+		System.out.println("Answer is:" + targetNode.node.getElement());
+	}
+}

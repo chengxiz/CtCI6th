@@ -1,0 +1,23 @@
+package cracking.Library;
+
+public class Graph {
+	public static int MAX_VERTICLES = 6;
+	private Vertex[] vertices;
+	public int count;
+	public Graph() {
+		vertices = new Vertex[MAX_VERTICLES];
+		count = 0;
+	}
+
+	public void addVertex(Vertex v){
+		if (count < vertices.length) {
+			vertices[count] = x;
+			count++;
+		} else {
+			System.out.print("Graph full")
+		}
+	}
+	public Vertex[] getVertex() {
+		return vertices;
+	}
+}

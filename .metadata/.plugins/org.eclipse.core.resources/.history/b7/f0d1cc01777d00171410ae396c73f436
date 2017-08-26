@@ -1,0 +1,31 @@
+package cracking.ch2;
+import cracking.ch2.SinglyLinkedList.Node;
+public class Partition2_4 {
+	private static Node Partition(Node n, int i){
+		Node head = new Node();
+		Node tail = new Node();
+		Node start = new Node();
+		while (n.getNext()!=null){
+			if (n.getElement() < i){
+				if (head.getElement()==null){
+					head.setElement(n.getElement());
+					start = head;
+				}
+				else {
+					head.setNext(new Node(n.getElement()));
+				}
+			}
+			else {
+				if (tail.getElement()==null){
+					tail.setElement(n.getElement());
+				}
+				else {
+					tail.setNext(new Node(n.getElement()));
+				}				
+			}
+			n = n.getNext();
+		}
+		head.setNext(tail);
+		return start;
+	}
+}

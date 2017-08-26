@@ -1,0 +1,46 @@
+package cracking.ch1;
+
+public class URLify1_3 {
+	private static String replaceSpace1(String s) {
+		char[] str = s.toCharArray();
+		int l = str.length;
+		int TL = l;	// TL refers to "True Length" which omits the length of continuous zero at the end.
+		while (TL >= 0) {
+			if (!Character.isWhitespace(str[TL-1]))
+				break;
+			TL--;				// update the value of TL
+		}
+		boolean[] checkArray = new boolean[TL];
+		int NS = 0;				// NS refers to "Number of Space"
+		for (int j = 0; j < TL; j++) {
+			if (Character.isWhitespace(str[j])){
+				checkArray[j] = true;
+				NS++;
+			}
+		}
+		int newl = TL + 2*NS;
+		int index = TL - 1;
+		char[] charSet = new char[newl];
+		int k = newl-1;
+		while ( k >= 0 ) {
+			if (Character.isWhitespace(str[index])) {
+				charSet[k] = '0';
+				charSet[k-1] = '2';
+				charSet[k-2] = '%';
+				k = k -3;
+			} else {
+				charSet[k] = str[index];
+				k--;				
+			}
+			index--;
+		}
+		s = String.copyValueOf(charSet);
+		return s;
+	}
+	public static void main(String[] args) {
+		String s1 = new String("what the hell    ");
+		System.out.println(replaceSpace1(s1));
+		String s2 = new String(" Are you kidding me?");
+		System.out.println(replaceSpace1(s2));		
+	}
+}

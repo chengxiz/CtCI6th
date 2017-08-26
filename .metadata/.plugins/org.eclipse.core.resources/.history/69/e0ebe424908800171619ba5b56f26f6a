@@ -1,0 +1,37 @@
+package cracking.Library;
+import java.util.ArrayList;
+import java.util.HashMap;
+
+public class Project {
+	private String name;
+	private ArrayList<Project> children = new ArrayList<Project>();
+	private int numDependencies;
+	private HashMap<String,Project> map= new HashMap<String, Project>();
+	public String getName() {
+		return name;
+	}
+	public int getNumberDependencies() {
+		return numDependencies;
+	}
+	public ArrayList<Project> getChildren() {
+		return children;
+	}
+
+	public Project(String n){
+		name =n;
+	}
+	public void addNeighbor(Project p){
+		if(!map.containsKey(p.getName())){
+			map.put(p.getName(), p);
+			children.add(p);
+			p.increaseDependencies();
+		}
+	}
+
+	public void increaseDependencies(){
+		this.numDependencies++;
+	}
+	public void decreaseDependencies(){
+		this.numDependencies--;
+	}	
+}

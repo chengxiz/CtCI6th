@@ -1,0 +1,14 @@
+package cracking.ch4;
+import cracking.Library.*;
+public class Route2 {
+	boolean search(Graph g, Vertex start, Vertex end) {
+		if (start == end) return true;
+
+		SinglyLinkedList<Vertex> queue = new SinglyLinkedList<Vertex>();
+
+		for (Vertex u: g.getVertices()) {
+			u.state = State.Visiting;
+		}
+	}
+	
+}

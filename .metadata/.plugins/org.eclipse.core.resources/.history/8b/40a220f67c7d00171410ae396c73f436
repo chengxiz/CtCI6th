@@ -1,0 +1,52 @@
+package cracking.ch2;
+import cracking.ch2.SinglyLinkedList.Node;
+public class Partition2_4 {
+	private static Node Partition(Node<Integer> n, int i){
+		Node head = new Node();
+		Node tail = new Node();
+		Node start_head = new Node();
+		Node start_tail = new Node();
+		while (n.getNext()!=null){
+			if (n.getElement() < i){
+				if (head.getElement()==null){
+					head.setElement(n.getElement());
+					start_head = head;
+				}
+				else {
+					head.setNext(new Node(n.getElement()));
+					head = head.getNext()
+				}
+			}
+			else {
+				if (tail.getElement()==null){
+					tail.setElement(n.getElement());
+					start_tail = tail;
+				}
+				else {
+					tail.setNext(new Node(n.getElement()));
+					tail = tail.getNext();
+				}				
+			}
+			n = n.getNext();
+		}
+		tail.setNext(null);
+		head.setNext(start_tail);
+		return start_head;
+	}
+	public static void main(String[] args) {
+		SinglyLinkedList<Integer> l = new SinglyLinkedList<Integer>();
+		l.addLast(7);
+		l.addLast(1);
+		l.addLast(6);
+		l.addLast(5);
+		l.addLast(9);
+		l.addLast(5);		
+		l.addLast(2);
+		l.viewList();
+		@SuppressWarnings("unchecked")
+		Node<Integer> s = Partition(l.head,5);
+		// while (s.getNext()!=null) {
+		// 	System.out.println(s.getElement());
+		// }
+	}
+}

@@ -1,0 +1,39 @@
+package cracking.ch1;
+
+public class Zipper1_6 {
+	public static String zipString(String str){
+		char[] charSet = str.toCharArray();
+		int[] table = new int[Character.getNumericValue('Z') -
+		                    Character.getNumericValue('a') - + 1];
+		int num = 1;
+		char[] newstring = new char[10000];
+		newstring[0] = charSet[0];
+		int j = 0;
+		for (int i=1; i<charSet.length;i++){
+			if (charSet[i]==charSet[i-1]){
+				num++;
+			} else {
+				j++;
+				newstring[j] = (char)num;
+				int index = Character.getNumericValue(charSet[i-1]) - Character.getNumericValue('a') +1;
+				table[index]+=num-2;
+				i = i+2;
+				num = 1;
+			}
+		}
+		int sum =0;
+		for (int k=0; k < table.length; k++) {
+			sum += table[k];
+		}
+		if (sum > 0) {
+			return String.copyValueOf(newstring);
+		} else {
+			return str;
+		}		
+	}
+
+	public static void main(String[] args) {
+		String str = new String("aabcccccaaa");
+		System.out.println(zipString(str));
+	}
+}

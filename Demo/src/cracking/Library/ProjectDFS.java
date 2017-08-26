@@ -1,0 +1,34 @@
+package cracking.Library;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+
+public class ProjectDFS {
+	private String name;
+	private ArrayList<ProjectDFS> children = new ArrayList<ProjectDFS>();
+	private HashMap<String,ProjectDFS> map= new HashMap<String, ProjectDFS>();
+	public enum State {COMPLETE, PARTIAL, BLANK};
+	private State state = State.BLANK;
+	public String getName() {
+		return name;
+	}
+	public ArrayList<ProjectDFS> getChildren() {
+		return children;
+	}
+
+	public ProjectDFS(String n){
+		name =n;
+	}
+	public void addNeighbor(ProjectDFS p){
+		if(!map.containsKey(p.getName())){
+			map.put(p.getName(), p);
+			children.add(p);
+		}
+	}
+	public State getState() {
+		return state;
+	}
+	public void setState(State st) {
+		state = st;
+	}
+}

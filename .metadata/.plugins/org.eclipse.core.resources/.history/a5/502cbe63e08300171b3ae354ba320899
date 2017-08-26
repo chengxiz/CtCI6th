@@ -1,0 +1,46 @@
+package cracking.ch2;
+import cracking.Library.*;
+public class Q_2_2{
+	public static Node<?> target = null;
+	public static SinglyLinkedList<Character> linkedList;
+	public static int kthtolast_rec(Node<?> head, int n){		
+		if ( head == null){
+			return 0;
+		}
+		Node<?> next = head.getNext();
+		int index = kthtolast_rec( next , n) + 1;
+		if (index == n) {
+			target = head;   
+		}
+		return index;
+	}
+	public static class Index{
+		public int value = 0;
+	}
+	public static Index kthtolast_rec2(Node<?> head, int n, Index i){
+		if (head == null) return new Index();
+		Node<?> next = head.getNext();
+		Index j = kthtolast_rec2(next, n, i);
+		j.value++;
+		if (j.value == n) target = next;
+		return i;
+	}
+	public static void main(String[] args) {
+		linkedList = new SinglyLinkedList<Character>();
+		linkedList.addLast('F');
+		linkedList.addLast('O');
+		linkedList.addLast('L');
+		linkedList.addLast('L');
+		linkedList.addLast('O');
+		linkedList.addLast('W');
+		linkedList.addLast(' ');
+		linkedList.addLast('U');
+		linkedList.addLast('P');	
+		@SuppressWarnings("unused")
+		int answer_Rec = kthtolast_rec(linkedList.head,4);
+		System.out.println("Answer is:" + target.getElement());
+		Index j = kthtolast_rec2(linkedList.head,4, new Index());
+		System.out.println("Answer is:" + j.value);
+		
+	}
+}

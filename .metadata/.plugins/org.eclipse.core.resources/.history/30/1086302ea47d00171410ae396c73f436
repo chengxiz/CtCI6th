@@ -1,0 +1,58 @@
+package cracking.ch2;
+import cracking.ch2.SinglyLinkedList.Node;
+public class Partition2_4 {
+	private static Node Partition(Node<Integer> node, int x){
+		Node beforeStart = null;
+		Node beforeEnd = null;
+		Node afterStart = null;
+		Node afterEnd = null;
+
+		/* Partition list */
+		while (node != null) {
+			Node next = node.getNext();
+			node.setNext(null);
+			if (node.getElement() < x) {
+				/* insert node into end of before list */
+				if (beforeStart==null){
+					beforeStart = node;
+					beforeEnd = beforeStart;
+				} else {
+					beforeEnd.setNext(node);
+					beforeEnd = node;
+				}
+			} else {
+				/* Insert node into end of after list */
+				if (afterStart == null) {
+					afterStart = node;
+					afterEnd = afterStart;
+				} else {
+					afterEnd.setNext(node);
+					afterEnd = node;
+				}
+			}
+			node = next;
+		}
+
+		if (beforeStart == null) return afterStart;
+
+		/* Merge before list and after list */
+		beforeEnd.setNext(afterStart);
+		return beforeStart;
+	}
+	public static void main(String[] args) {
+		SinglyLinkedList<Integer> l = new SinglyLinkedList<Integer>();
+		l.addLast(7);
+		l.addLast(1);
+		l.addLast(6);
+		l.addLast(5);
+		l.addLast(9);
+		l.addLast(5);		
+		l.addLast(2);
+		l.viewList();
+		@SuppressWarnings("unchecked")
+		Node<Integer> s = Partition(l.head,5);
+		// while (s.getNext()!=null) {
+		// 	System.out.println(s.getElement());
+		// }
+	}
+}

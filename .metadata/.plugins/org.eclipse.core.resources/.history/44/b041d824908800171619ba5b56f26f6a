@@ -1,0 +1,25 @@
+package cracking.Library;
+import java.util.ArrayList;
+import java.util.HashMap;
+public class Graph_Q7 {
+	private ArrayList<Project> projects = new ArrayList<Project>();
+	private HashMap<String,Project> map = new HashMap<String, Project>();
+
+	public Project getOrCreateProject(String name){
+		if(!map.containsKey(name)){
+			Project p = new Project(name);
+			map.put(name, p);
+			projects.add(p);
+		}
+		return map.get(name);
+	}
+
+	public void addEdge(String startname, String endname){
+		Project start = getOrCreateProject(startname);
+		Project end = getOrCreateProject(endname);
+		start.addNeighbor(end);
+	}
+	public ArrayList<Project> getProjects(){
+		return projects;
+	}
+}

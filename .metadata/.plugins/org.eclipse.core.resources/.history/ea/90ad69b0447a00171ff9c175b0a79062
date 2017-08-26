@@ -1,0 +1,27 @@
+package cracking.ch1;
+
+public class StrRotat1_9 {
+	protected static boolean isSubstring(String strSub, String strAll){
+		if(strAll.indexOf(strSub)==-1) return false;
+		return true;
+	}
+	private static boolean isRotation(String str1, String str2){
+		if (str1.length()!=str2.length()) return false;
+		for (int i=0; i<str1.length(); i++){
+			char[] charArray = str1.toCharArray();
+			StringBuilder sb = new StringBuilder();
+			if (!(sb.length()==0)){
+				sb.append(str1.charAt(i));
+				if(!isSubstring(sb.toString(), str2))
+					if(isSubstring(str1.substring(1,str1.length()), str2))
+						return true;
+			}
+		}
+		return false;
+	}
+	public static void main(String[] args) {
+		str1 = "watermellon";
+		str2 = "ermellonwat";
+		System.out.println(isRotation(str1,str2));
+	}
+}

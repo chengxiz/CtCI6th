@@ -1,0 +1,85 @@
+package cracking.ch4;
+import cracking.Library.*;
+import cracking.Library.Vertex.State;
+
+public class Route2 {
+	public static boolean search_BFS(Graph g, Vertex start, Vertex end) {
+		if (start == end) return true;
+
+		SinglyLinkedList<Vertex> queue = new SinglyLinkedList<Vertex>();
+
+		for (Vertex u: g.getVertices()) {
+			u.state = State.Unvisited;
+		}
+		start.state = State.Visiting;
+		queue.addLast(start);
+		Vertex u;
+		while (!queue.isEmpty()) {
+			u = queue.removeFirst();
+			if ( u != null) {
+				for (Vertex v: u.getAdjacent()) {
+					if (v.state == State.Unvisited) {
+						if (v == end) {
+							return true;
+						} else {
+							v.state = State.Visiting;
+							queue.addLast(v);
+						}
+					}
+				}
+				u.state = State.Visited;
+			}
+		}
+		return false;
+	}
+	public boolean search_DFS_Main(Graph g, Vertex start, Vertex end) {
+		if (start == end) return true;
+		//public static SinglyLinkedList<Vertex> queue = new SinglyLinkedList<Vertex>();
+		for (Vertex u: g.getVertices()) {
+			u.state = State.Unvisited;
+		}
+		return search_DFS_Recursion(start,end);
+	}
+	public static boolean search_DFS_Recursion(Vertex start, Vertex end) {
+		boolean found = false;
+		start.state =State.Visiting;
+		//queue.add(start);
+		for (Vertex v : start.getAdjacent()) {
+			if (v.state == State.Unvisited)					
+				found = (found || search_DFS_Recursion(v,end));
+		}
+		start.state = State.Visited;
+		if (start == end) return true;
+		return found;
+	}
+
+	public static Graph createNewGraph() {
+		Graph g = new Graph();        
+		Vertex[] temp = new Vertex[6];
+
+		temp[0] = new Vertex("a", 3);
+		temp[1] = new Vertex("b", 0);
+		temp[2] = new Vertex("c", 0);
+		temp[3] = new Vertex("d", 1);
+		temp[4] = new Vertex("e", 1);
+		temp[5] = new Vertex("f", 0);
+
+		temp[0].addAdjacent(temp[1]);
+		temp[0].addAdjacent(temp[2]);
+		temp[0].addAdjacent(temp[3]);
+		temp[3].addAdjacent(temp[4]);
+		temp[4].addAdjacent(temp[5]);
+		for (int i = 0; i < 6; i++) {
+			g.addVertices((temp[i]));
+		}
+		return g;
+	}
+	public static void main(String[] args) {
+		Graph g = createNewGraph();
+		Vertex[] n = g.getVertices();
+		Vertex start = n[2];
+		Vertex end = n[5];
+		System.out.println(search_BFS(g, start, end));
+	}
+	
+}

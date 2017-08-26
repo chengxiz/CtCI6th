@@ -1,0 +1,32 @@
+package cracking.ch4;
+
+import java.util.ArrayList;
+import java.util.LinkedList;
+
+import cracking.Library.TreeNode;
+
+public class Q_4_3_ListOfDepth {
+	public static ArrayList<LinkedList<TreeNode>> createLevelLinkedList(TreeNode root){
+		ArrayList<LinkedList<TreeNode>> lists = new ArrayList<LinkedList<TreeNode>>();
+		createLevelLinkedList(root, lists,0);
+		return lists;
+	}
+	public static void createLevelLinkedList(TreeNode node, ArrayList<LinkedList<TreeNode>> lists, int level){
+		if (node == null) return;
+		LinkedList<TreeNode> list;
+		if (lists.size() == level){
+			list = new LinkedList<TreeNode>();
+			lists.add(list);
+		} else {
+			list = lists.get(level);
+		}
+		list.add(node);
+		createLevelLinkedList(node.left, lists, level + 1);
+		createLevelLinkedList(node.right, lists, level + 1);
+	}
+	public static void main(String[] args) {
+		int[] a = {3,3,4,5,6,7,8,9,11};
+		TreeNode root = Q_4_2_MiniTree.createMinimalBST(a);
+		ArrayList<LinkedList<TreeNode>> lists = createLevelLinkedList(root);
+	}
+}

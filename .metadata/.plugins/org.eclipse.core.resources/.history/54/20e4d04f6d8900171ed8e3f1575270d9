@@ -1,0 +1,47 @@
+package cracking.ch4;
+
+import cracking.Library.TreeNode;
+
+public class Q_4_8_FirstCommonAncestor {
+	public static class Result {
+		public TreeNode node;
+		public boolean isAncestor;
+		public Result(TreeNode n, boolean isAnc){
+			node = n;
+			isAncestor = isAnc;
+		}
+	}
+	public static TreeNode commonAncestor(TreeNode root, TreeNode p, TreeNode q){
+		Result r = commonAncHelper(root,p,q);
+		if (r.isAncestor) {
+			return r.node;
+		}
+		return null;
+	}
+	public static Result commonAncHelper(TreeNode root, TreeNode p, TreeNode q){
+		if (root == null) {
+			return new Result(null,false);
+		}
+		if (root == p && root == q) {
+			return new Result(root,true);
+		}
+		Result rx = commonAncHelper(root.left, p, q);
+		if (rx.isAncestor) return rx;
+
+		Result ry = commonAncHelper(root.right, p, q);
+		if (ry.isAncestor) return ry;
+
+		if (rx.node != null && ry.node != null){
+			return new Result(root, true);
+		} else if (root == p || root == q){
+			boolean isAncestor = rx.node != null || ry.node != null;
+			return new Result(root, isAncestor);
+		} else {
+			return new Result(rx.node != null ? rx.node : ry.node, false);
+		}
+	}
+	public static void main(String[] args) {
+		int[] a = {3,3,4,5,6,7,8,9,11};
+		TreeNode mid = Q_4_2_MiniTree.createMinimalBST(a);		
+	}
+}

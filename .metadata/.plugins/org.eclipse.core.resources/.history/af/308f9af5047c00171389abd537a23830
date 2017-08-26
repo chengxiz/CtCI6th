@@ -1,0 +1,26 @@
+package cracking.ch2;
+
+public class ReturnKtoLast2_2 {
+	private static SinglyLinkedList<Character> linkedList;
+	private static int ReturnKLast_Rec(SinglyLinkedList.Node<Character> node, Integer K){
+		if (node==null) return 0;
+		int index = ReturnKLast_Rec(node.getNext(), K) + 1;
+		if (index == K) {
+			System.out.println(node.getElement());
+		}
+		return index;
+	}
+	public static void main(String[] args) {
+		linkedList = new SinglyLinkedList<Character>();
+		linkedList.addLast('F');
+		linkedList.addLast('O');
+		linkedList.addLast('L');
+		linkedList.addLast('L');
+		linkedList.addLast('O');
+		linkedList.addLast('W');
+		linkedList.addLast(' ');
+		linkedList.addLast('U');
+		linkedList.addLast('P');	
+		SinglyLinkedList<Character> answer = ReturnKLast_Rec(linkedList);	
+	}
+}

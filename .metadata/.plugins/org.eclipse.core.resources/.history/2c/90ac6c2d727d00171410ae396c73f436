@@ -1,0 +1,10 @@
+package cracking.ch2;
+import cracking.ch2.SinglyLinkedList.Node;
+public class DeleteMiddleNode {
+	private static boolean DeleteNode(Node n){
+		if (n==null || n.getNext()==null) return false;
+		n.setElement(n.getNext().getElement());
+		n.setNext(n.getNext());
+		return true;		
+	}
+}

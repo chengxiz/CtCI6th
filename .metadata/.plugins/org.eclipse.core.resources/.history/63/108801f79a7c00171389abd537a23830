@@ -1,0 +1,45 @@
+package cracking.ch2;
+import cracking.ch2.SinglyLinkedList.Node;
+public class SumList2_5 {
+	private static Node<Integer> addLists(
+	 	Node<Integer> l1,
+	 	Node<Integer> l2,
+	 	int carry){
+	 	if (l1 == null&&l2==null&&carry == 0) {
+	 		return null;
+	 	}
+	 	Node<Integer> result = new Node();
+	 	int value = carry;
+	 	if (l1 != null) value += l1.getElement();
+	 	if (l2 != null) value += l2.getElement();
+	 	/**
+	 	 *Set the value of second digit of number. 
+	 	 */
+	 	result.setElement( value%10 );
+
+	 	/** 
+	 	 *Recurse
+	 	 */
+	 	if (l1 != null || l2 != null) {
+	 		Node more = addLists(
+	 			l1==null?null:l1.next,
+				l2==null?null:l2.next,
+				value >= 10? 1: 0);
+	 		result.setNext(more);
+	 	}
+	 	return result;
+	}
+	public static void main(String[] args) {
+		SinglyLinkedList<Integer> l1 = new SinglyLinkedList<Integer>();
+		SinglyLinkedList<Integer> l2 = new SinglyLinkedList<Integer>();
+		l1.addLast(7);
+		l1.addLast(1);
+		l1.addLast(6);
+		l1.viewList();
+		l2.addLast(5);
+		l2.addLast(9);
+		l2.addLast(2);
+		l2.viewList();
+
+	}
+}

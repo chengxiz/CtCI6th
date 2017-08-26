@@ -1,0 +1,32 @@
+package cracking.ch2;
+import cracking.Library.*;
+public class Q_2_2{
+	public static Node<?> target = null;
+	public static SinglyLinkedList<Character> linkedList;
+	public static int kthtolast_rec(Node<?> head, int n){		
+		if ( head == null){
+			return 0;
+		}
+		Node<?> next = head.getNext();
+		int index = kthtolast_rec( next , n) + 1;
+		if (index == n) {
+			target = next;   
+		}
+		return index;
+	}
+	public static void main(String[] args) {
+		linkedList = new SinglyLinkedList<Character>();
+		linkedList.addLast('F');
+		linkedList.addLast('O');
+		linkedList.addLast('L');
+		linkedList.addLast('L');
+		linkedList.addLast('O');
+		linkedList.addLast('W');
+		linkedList.addLast(' ');
+		linkedList.addLast('U');
+		linkedList.addLast('P');	
+		int answer_Rec = kthtolast_rec(linkedList.head,4);
+		System.out.println(target.getElement());
+		
+	}
+}
