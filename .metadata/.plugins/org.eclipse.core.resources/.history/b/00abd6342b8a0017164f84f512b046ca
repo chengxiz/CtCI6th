@@ -1,0 +1,13 @@
+package cracking.ch4;
+
+import cracking.Library.TreeNode;
+
+public class Q_4_9_BSTsequence {
+	ArrayList<LinkedList<Integer>> allSequences(TreeNode node){
+		ArrayList<LinkedList<Integer>> result = new ArrayList<LinkedList<Integer>>();
+
+		if(node == null) {
+			result.add(new LinkedList<Integer>());
+		}
+	}
+}
