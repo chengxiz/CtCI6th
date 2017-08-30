@@ -1,0 +1,30 @@
+package Q_5_2_BinaryToString;
+
+public class Question {
+	public static String printBinary(double num) {
+		if (num <= 0 | num >= 1) return "ERROR";
+
+		StringBuilder binary = new StringBuilder();
+		binary.append("0");
+		binary.append(".");
+		while (num > 0){
+			/* Setting a limit on length: 32 characters */
+			if (binary.length() >= 32) {
+				return "ERROR";
+			}
+
+			double r = num * 2;
+			if (r >= 1) {
+				binary.append("1");
+				num = r - 1;
+			} else {
+				binary.append("0");
+				num = r;
+			}
+		}
+		return binary.toString();
+	}
+	public static void main(String[] args) {
+		System.out.println(printBinary((double)0.875));
+	}
+}

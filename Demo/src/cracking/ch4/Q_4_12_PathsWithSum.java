@@ -17,9 +17,11 @@ public class Q_4_12_PathsWithSum {
 		runningSum += node.data;
 		int sum = runningSum - targetSum;
 		/* if the HashTable pathCount has the value of sum, it means that
-		 * there is existing running sum y referring 'runningSum' minus
+		 * there is existing running sum y referring 'runningSum' 
+		 * minus
 		 * running sum x here refers to 'sum' 
-		 * equals to targetSum
+		 * equals to 
+		 * targetSum
 		 * then it means in this path there is a path which doesn't start from root has the targetSum
 		 */
 		int totalPaths = pathCount.getOrDefault(sum,0);

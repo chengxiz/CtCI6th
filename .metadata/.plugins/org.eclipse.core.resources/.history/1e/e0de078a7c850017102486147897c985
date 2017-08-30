@@ -1,6 +1,0 @@
-package cracking.ch4;
-
-public class Route2 {
-	public enum State { Unvisited, Visited, Visiting; }
-	
-}
