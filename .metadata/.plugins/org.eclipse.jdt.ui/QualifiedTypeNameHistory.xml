@@ -11,8 +11,8 @@
 <fullyQualifiedTypeName name="cracking.Library.SinglyLinkedList"/>
 <fullyQualifiedTypeName name="cracking.Library.SinglyLinkedList.Node"/>
 <fullyQualifiedTypeName name="java.util.Stack"/>
-<fullyQualifiedTypeName name="java.util.ArrayList"/>
 <fullyQualifiedTypeName name="java.util.LinkedList"/>
 <fullyQualifiedTypeName name="cracking.Library.TreeNode"/>
 <fullyQualifiedTypeName name="java.util.HashMap"/>
+<fullyQualifiedTypeName name="java.util.ArrayList"/>
 </qualifiedTypeNameHistroy>

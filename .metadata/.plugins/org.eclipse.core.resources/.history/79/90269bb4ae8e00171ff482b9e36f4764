@@ -1,0 +1,39 @@
+package Q_6_10_Poison;
+
+public class Question_Naive {
+	public int findPosionedBottle(ArrayList<Bottle> bottles, ArrayList<TestStrip> strips){
+		int today = 0;
+
+		while (bottles.size() >  && strips.size() > 0) {
+			/* Run tests. */
+			runTestSet(bottles, strips, today);
+
+			/* Wait for results. */
+			today += TestStrip.DAYS_FOR_RESULT;
+
+			/* Check results. */
+			for (TestStrip strip : strips) {
+				if (strip.isPositiveOnDay(today)) {
+					bottles = strip.getLastWeekBottles(today);
+					strips.remove(strip);
+					break;
+				}
+			}
+
+		}
+		if (bottles.size() == 1) {
+			return bottles.get(0).getId();
+		}
+		return -1;
+	}
+
+	/* Distribute bottles across tet strips evenly. */
+	public void runTestSet(ArrayList<Bottle> bottles, ArrayList<TestStrip> strips, int day) {
+		int index = 0;
+		for (Bottle bottle: bottles) {
+			TestStrip strip = strips.get(index);
+			strip.addDropOnDay(day, bottle);
+			index = (index + 1) % strips.size();
+		}	
+	}
+}
